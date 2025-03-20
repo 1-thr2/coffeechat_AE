@@ -1,7 +1,4 @@
-function goToHome() {
-      currentStep = 0;
-      showSlide(currentStep);
-    }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -237,17 +234,17 @@ function goToHome() {
       padding-left: 8px;
     }
 
-    /* 하이라이트 박스 */
+    /* 하이라이트 박스 (첫 페이지 노란색 강조 부분 복원) */
     .highlight-box {
-      background-color: rgba(48, 77, 146, 0.05);
-      border-left: 4px solid var(--primary);
+      background-color: #EFF6FF; 
+      border-left: 4px solid var(--accent);
       border-radius: var(--radius);
       padding: var(--space-md) var(--space-md);
       margin-bottom: var(--space-lg);
       box-shadow: var(--shadow-light);
     }
     .highlight-box strong {
-      color: var(--primary);
+      color: var(--primary-dark);
     }
 
     /* 로고 배너 */
@@ -509,7 +506,7 @@ function goToHome() {
 
         <div class="highlight-box">
           <strong>안녕하세요, 모비데이즈 HRBP 김한슬입니다 👋</strong><br>
-          입사 4개월 차지만, 이곳의 가능성과 변화에 함께하고 싶어 합류했습니다.
+          입사 4개월 차지만, 이곳의 가능성과 변화에 함께하고 싶어 합류했습니다.<br>
           오늘은 공고에 나온 내용이 아닌, 회사의 실제 모습에 대해 이야기 나누고 싶습니다.
         </div>
 
@@ -696,9 +693,13 @@ function goToHome() {
 
       <!-- 버튼 -->
       <div class="button-container">
-        <button id="prevBtn" onclick="changeSlide(-1)">이전</button>
-        <button id="homeBtn" onclick="goToHome()" style="display: none;">처음으로</button>
-        <button id="nextBtn" onclick="changeSlide(1)">다음</button>
+        <div class="left-buttons">
+          <button id="prevBtn" onclick="changeSlide(-1)">이전</button>
+        </div>
+        <div class="right-buttons">
+          <button id="homeBtn" onclick="location.href='#slide1'; window.location.reload();" style="display: none;">처음으로</button>
+          <button id="nextBtn" onclick="changeSlide(1)">다음</button>
+        </div>
       </div>
     </div>
   </div>
@@ -735,7 +736,13 @@ function goToHome() {
         cardContainer.classList.add('visible');
         
         updateProgress(index);
-        prevBtn.disabled = (index === 0);
+        
+        // 첫 페이지에서는 이전 버튼 숨기기
+        if (index === 0) {
+          prevBtn.style.display = 'none';
+        } else {
+          prevBtn.style.display = 'block';
+        }
         
         // 마지막 슬라이드에서는 다음 버튼 숨기고 처음으로 버튼 표시
         if (index === totalSteps - 1) {
