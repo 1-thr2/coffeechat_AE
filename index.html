@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+function goToHome() {
+      currentStep = 0;
+      showSlide(currentStep);
+    }<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -180,6 +183,20 @@
       color: var(--text-dark);
       margin-bottom: var(--space-md);
     }
+    
+    /* 핵심 텍스트 강조 스타일 - 미니멀하게 수정 */
+    .key-point {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    /* 단락 구분 스타일 - 더 미니멀하게 */
+    .section-divider {
+      height: 1px;
+      background-color: #e5e8ec;
+      margin: var(--space-md) 0;
+      width: 100%;
+    }
 
     /* ul, ol 분리하여 스타일 */
     ul {
@@ -192,20 +209,21 @@
       padding-left: 24px;
       margin-bottom: var(--space-xs);
       font-size: 16px;
-      transition: transform 0.2s ease;
-    }
-    ul li:hover {
-      transform: translateX(2px);
     }
     /* 커스텀 불릿 */
     ul li::before {
       content: "•";
       color: var(--accent);
       position: absolute;
-      left: 0;
+      left: 8px;
       top: 0;
       line-height: 1.7;
       font-size: 16px;
+    }
+    
+    /* 중요 리스트 아이템 강조 - 미니멀하게 수정 */
+    ul li.highlight {
+      background-color: rgba(48, 77, 146, 0.05);
     }
 
     ol {
@@ -221,8 +239,8 @@
 
     /* 하이라이트 박스 */
     .highlight-box {
-      background: linear-gradient(to right, rgba(48, 77, 146, 0.08), rgba(48, 77, 146, 0.02));
-      border-left: 4px solid var(--accent);
+      background-color: rgba(48, 77, 146, 0.05);
+      border-left: 4px solid var(--primary);
       border-radius: var(--radius);
       padding: var(--space-md) var(--space-md);
       margin-bottom: var(--space-lg);
@@ -230,19 +248,6 @@
     }
     .highlight-box strong {
       color: var(--primary);
-      position: relative;
-      display: inline-block;
-    }
-    .highlight-box strong::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 30%;
-      background-color: rgba(247, 213, 64, 0.3);
-      z-index: -1;
-      border-radius: 2px;
     }
 
     /* 로고 배너 */
@@ -273,7 +278,7 @@
       font-size: 18px;
       font-weight: 700;
       color: var(--primary);
-      margin-bottom: var(--space-xs);
+      margin-bottom: var(--space-sm);
     }
 
     /* 자회사 목록 */
@@ -313,21 +318,11 @@
       font-size: 16px;
       font-style: italic;
       color: var(--primary);
-      border-left: 4px solid var(--accent);
+      border-left: 4px solid var(--primary);
       padding: var(--space-sm) var(--space-md);
       margin: var(--space-md) 0;
-      background: linear-gradient(to right, rgba(247, 213, 64, 0.1), rgba(247, 213, 64, 0.02));
+      background-color: rgba(48, 77, 146, 0.05);
       border-radius: 0 var(--radius) var(--radius) 0;
-      position: relative;
-    }
-    blockquote::before {
-      content: """;
-      position: absolute;
-      left: var(--space-sm);
-      top: -10px;
-      font-size: 40px;
-      color: rgba(247, 213, 64, 0.5);
-      font-family: serif;
     }
 
     /* 타임라인 */
@@ -396,20 +391,13 @@
       transition: 0.2s ease;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(48, 77, 146, 0.2);
     }
     .button-container button:hover:not(:disabled) {
       background-color: var(--primary-light);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(48, 77, 146, 0.25);
     }
     .button-container button:disabled {
       background-color: #d1d5db;
       cursor: not-allowed;
-      box-shadow: none;
-    }
-    .button-container button#nextBtn {
-      background: linear-gradient(to right, var(--primary), var(--primary-light));
     }
     .button-container button#prevBtn {
       background-color: var(--white);
@@ -418,6 +406,13 @@
     }
     .button-container button#prevBtn:hover:not(:disabled) {
       background-color: rgba(48, 77, 146, 0.05);
+    }
+    .button-container button#homeBtn {
+      background-color: var(--accent);
+      color: var(--text-dark);
+    }
+    .button-container button#homeBtn:hover {
+      background-color: var(--accent-dark);
     }
     .button-container button::after {
       content: '';
@@ -531,26 +526,29 @@
         <div class="logo-banner"></div>
 
         <h1>모비데이즈의 전략적 방향</h1>
-        <p>모비데이즈는 단순 광고대행을 넘어 글로벌 시장으로 확장하며 미디어 생태계를 구축해 나가고 있습니다.</p>
+        <p>모비데이즈는 단순 광고대행을 넘어 <span class="key-point">글로벌 시장으로 확장</span>하며 미디어 생태계를 구축해 나가고 있습니다.</p>
+        
         <ol>
           <li>퍼포먼스 마케팅에서 안정적 성과 창출 (주력 사업 강화)</li>
           <li>성과를 기반으로 신사업과 연계 확장</li>
           <li>장기적으로는 마케팅 솔루션 분야 강화 및 확장</li>
         </ol>
 
+        <div class="section-divider"></div>
+
         <div class="dual-box">
           <div class="box">
             <h3>현재 핵심 경쟁력</h3>
             <ul>
               <li>디자인 중심의 크리에이티브 랩 (비딩 경쟁력)</li>
-              <li>코스닥 상장으로 확보한 안정적 자금력</li>
+              <li class="highlight">코스닥 상장으로 확보한 안정적 자금력</li>
               <li>다양한 자회사를 통한 미디어 생태계</li>
             </ul>
           </div>
           <div class="box">
             <h3>투자 확대 분야</h3>
             <ul>
-              <li>글로벌 마케팅 역량 강화</li>
+              <li class="highlight">글로벌 마케팅 역량 강화</li>
               <li>마케팅 솔루션 개발</li>
               <li>자회사 시너지를 통한 신사업 영역</li>
             </ul>
@@ -584,24 +582,29 @@
       <!-- Slide 3 -->
       <div class="slide" id="slide3">
         <h1>모비데이즈의 현재와 도전</h1>
+        
         <p><strong>현재 진행중인 비즈니스</strong></p>
         <ul>
-          <li>게임 산업: PC/모바일/콘솔 게임 마케팅 (넥슨, 컴투스 등)</li>
+          <li class="highlight">게임 산업: <span class="key-point">PC/모바일/콘솔 게임 마케팅</span> (넥슨, 컴투스 등)</li>
           <li>금융/보험: 1팀과 4팀에서 주로 담당, 안정적 파트너십 운영</li>
           <li>기타 소비재: 3/5팀에서 다양한 영역 커버</li>
         </ul>
 
-        <p><strong>솔직한 현재 도전 과제</strong></p>
+        <div class="section-divider"></div>
+        
+        <p><strong>현재 도전 과제</strong></p>
         <ul>
           <li>버티컬 매체(토스/당근 등) 활용 경험 부족</li>
-          <li>규모 큰 클라이언트 수주에 도전하지만 대부분 성사되지 않음</li>
+          <li class="highlight">규모 큰 클라이언트 수주에 도전하지만 대부분 성사되지 않음</li>
           <li>RFP에 없는 실질 니즈 파악 & 맞춤 솔루션 필요</li>
         </ul>
 
+        <div class="section-divider"></div>
+        
         <p><strong>실제 일하는 방식</strong></p>
         <ul>
           <li>경영진 직보고로 빠른 승인 가능, 논리·수치·히스토리 기반 의사결정</li>
-          <li>경영진은 큰 방향만 제시, 리더가 우선순위와 실행 책임</li>
+          <li class="highlight">경영진은 큰 방향만 제시, <span class="key-point">리더가 우선순위와 실행 책임</span></li>
           <li>영업/매출 성과를 우선시하며, 성과에 따른 적극적 보상</li>
         </ul>
 
@@ -616,17 +619,20 @@
         <h1>우리가 찾는 리더</h1>
         <p><strong>AE 리드에게 기대하는 역할</strong></p>
         <ul>
-          <li>조직 성과 목표: 매출·생산성·구성원 매니지먼트 통합 관리</li>
-          <li>네트워크 활용: 인적 네트워크로 실질적 비즈니스 창출</li>
-          <li>우선순위 설정: 중요한 업무 선별 & 리소스 효율 배분</li>
+          <li><span class="key-point">조직 성과 목표:</span> 매출·생산성·구성원 매니지먼트 통합 관리</li>
+          <li><span class="key-point">네트워크 활용:</span> 인적 네트워크로 실질적 비즈니스 창출</li>
+          <li class="highlight"><span class="key-point">우선순위 설정:</span> 중요한 업무 선별 & 리소스 효율 배분</li>
         </ul>
+        
+        <div class="section-divider"></div>
+        
         <div class="dual-box">
           <div class="box">
             <h3>제공하는 환경</h3>
             <ul>
               <li>본인 영업·마케팅 강점 중심 팀 빌딩</li>
               <li>신속 의사결정 & 과감한 시도 적극 지원</li>
-              <li>성과 따른 파격 보상 체계</li>
+              <li class="highlight">성과 따른 파격 보상 체계</li>
             </ul>
           </div>
           <div class="box">
@@ -638,9 +644,10 @@
             </ul>
           </div>
         </div>
+        
         <blockquote>
           "이전 리더는 우선순위 정리에 어려움을 겪었습니다.  
-          우리는 스스로 판단하고 주도적으로 실행할 수 있는 리더를 찾고 있어요."
+          우리는 <span class="key-point">스스로 판단하고 주도적으로 실행할 수 있는 리더</span>를 찾고 있어요."
         </blockquote>
       </div>
 
@@ -690,6 +697,7 @@
       <!-- 버튼 -->
       <div class="button-container">
         <button id="prevBtn" onclick="changeSlide(-1)">이전</button>
+        <button id="homeBtn" onclick="goToHome()" style="display: none;">처음으로</button>
         <button id="nextBtn" onclick="changeSlide(1)">다음</button>
       </div>
     </div>
@@ -701,6 +709,7 @@
     const stepCounter = document.getElementById('stepCounter');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const homeBtn = document.getElementById('homeBtn');
     const cardContainer = document.getElementById('cardContainer');
 
     let currentStep = 0;
@@ -727,7 +736,15 @@
         
         updateProgress(index);
         prevBtn.disabled = (index === 0);
-        nextBtn.disabled = (index === totalSteps - 1);
+        
+        // 마지막 슬라이드에서는 다음 버튼 숨기고 처음으로 버튼 표시
+        if (index === totalSteps - 1) {
+          nextBtn.style.display = 'none';
+          homeBtn.style.display = 'block';
+        } else {
+          nextBtn.style.display = 'block';
+          homeBtn.style.display = 'none';
+        }
       }, 200); // 짧은 지연 후 새 슬라이드 표시
     }
 
