@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모비데이즈 커피챗_AE </title>
+  <title>모비데이즈 커피챗_AE</title>
   <!-- 폰트: Noto Sans KR -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +17,11 @@
       --primary: #304D92;      /* 로고에서 가져온 진한 파란색 */
       --primary-light: #5671BD;
       --accent: #F7D540;       /* 로고에서 가져온 노란색 */
+      --accent-light: #FFE978; /* 밝은 노란색 - 강조용 */
+      --accent-dark: #E3B800;  /* 어두운 노란색 - 상호작용용 */
       --secondary: #00C853;    
       --bg: #f9fafc;           
+      --bg-gradient: linear-gradient(135deg, #f9fafc 0%, #EDF1F7 100%); /* 미묘한 그라디언트 배경 */
       --white: #ffffff;
       --text-dark: #191F28;    /* 더 진한 텍스트 컬러 */
       --text-medium: #4a5568;  
@@ -43,7 +46,7 @@
     }
 
     body {
-      background-color: var(--bg);
+      background: var(--bg-gradient);
       color: var(--text-dark);
       overflow: hidden; /* 슬라이드 전환 위해 스크롤 막음 */
       line-height: 1.6;
@@ -112,7 +115,7 @@
       padding: 0 var(--space-md);
     }
     .card {
-      background-color: var(--white);
+      background: linear-gradient(165deg, var(--white) 0%, #f8fafd 100%);
       box-shadow: var(--shadow-light);
       border: 1px solid rgba(0,0,0,0.06); /* 토스 스타일 경계선 */
       border-radius: var(--radius);
@@ -189,11 +192,15 @@
       padding-left: 24px;
       margin-bottom: var(--space-xs);
       font-size: 16px;
+      transition: transform 0.2s ease;
+    }
+    ul li:hover {
+      transform: translateX(2px);
     }
     /* 커스텀 불릿 */
     ul li::before {
       content: "•";
-      color: var(--primary);
+      color: var(--accent);
       position: absolute;
       left: 0;
       top: 0;
@@ -214,8 +221,8 @@
 
     /* 하이라이트 박스 */
     .highlight-box {
-      background-color: rgba(48, 77, 146, 0.08); /* Primary 컬러의 투명 버전 */
-      border-left: 4px solid var(--primary);
+      background: linear-gradient(to right, rgba(48, 77, 146, 0.08), rgba(48, 77, 146, 0.02));
+      border-left: 4px solid var(--accent);
       border-radius: var(--radius);
       padding: var(--space-md) var(--space-md);
       margin-bottom: var(--space-lg);
@@ -223,6 +230,19 @@
     }
     .highlight-box strong {
       color: var(--primary);
+      position: relative;
+      display: inline-block;
+    }
+    .highlight-box strong::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      background-color: rgba(247, 213, 64, 0.3);
+      z-index: -1;
+      border-radius: 2px;
     }
 
     /* 로고 배너 */
@@ -293,11 +313,21 @@
       font-size: 16px;
       font-style: italic;
       color: var(--primary);
-      border-left: 4px solid var(--primary);
+      border-left: 4px solid var(--accent);
       padding: var(--space-sm) var(--space-md);
       margin: var(--space-md) 0;
-      background-color: rgba(48, 77, 146, 0.05);
+      background: linear-gradient(to right, rgba(247, 213, 64, 0.1), rgba(247, 213, 64, 0.02));
       border-radius: 0 var(--radius) var(--radius) 0;
+      position: relative;
+    }
+    blockquote::before {
+      content: """;
+      position: absolute;
+      left: var(--space-sm);
+      top: -10px;
+      font-size: 40px;
+      color: rgba(247, 213, 64, 0.5);
+      font-family: serif;
     }
 
     /* 타임라인 */
@@ -316,12 +346,11 @@
       left: 0;
       right: 0;
       height: 2px;
-      background-color: #e5e8ec;
+      background: linear-gradient(to right, var(--primary-light), var(--accent));
       z-index: 1;
     }
     .timeline-item {
       position: relative;
-      background-color: var(--primary);
       color: #fff;
       padding: 8px 16px;
       border-radius: 20px;
@@ -329,10 +358,24 @@
       font-weight: 500;
       z-index: 2;
       box-shadow: var(--shadow-light);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .timeline-item:nth-child(1) {
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+    }
+    .timeline-item:nth-child(2) {
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      background-position: 25%;
+    }
+    .timeline-item:nth-child(3) {
+      background: linear-gradient(to right, var(--primary-light), var(--accent-dark));
+    }
+    .timeline-item:nth-child(4) {
+      background: linear-gradient(to right, var(--accent-dark), var(--accent));
     }
     .timeline-item:hover {
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     /* 버튼 */
@@ -346,20 +389,35 @@
       color: var(--white);
       border: none;
       border-radius: var(--radius);
-      padding: 12px 20px;
+      padding: 12px 24px;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       transition: 0.2s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(48, 77, 146, 0.2);
     }
     .button-container button:hover:not(:disabled) {
       background-color: var(--primary-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(48, 77, 146, 0.25);
     }
     .button-container button:disabled {
       background-color: #d1d5db;
       cursor: not-allowed;
+      box-shadow: none;
+    }
+    .button-container button#nextBtn {
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+    }
+    .button-container button#prevBtn {
+      background-color: var(--white);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .button-container button#prevBtn:hover:not(:disabled) {
+      background-color: rgba(48, 77, 146, 0.05);
     }
     .button-container button::after {
       content: '';
@@ -368,7 +426,7 @@
       height: 100%;
       top: 0;
       left: 0;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.15);
       transform: translateY(100%);
       transition: transform 0.3s ease;
     }
