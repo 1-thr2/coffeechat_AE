@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+/* 듀얼 박스 */
+    .dual-box {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-lg);
+    }<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -181,25 +187,24 @@
       margin-bottom: var(--space-md);
     }
     
-    /* 핵심 텍스트 강조 스타일 - 미니멀하게 수정 */
+    /* 핵심 텍스트 강조 스타일 - 첫 번째 이미지처럼 수정 */
     .key-point {
       font-weight: 600;
       color: var(--primary);
     }
     
-    /* 단락 구분 스타일 - 더 미니멀하게 */
+    /* 글자 단위 하이라이트 - 첫 번째 이미지처럼 */
+    .highlight-text {
+      background-color: rgba(247, 213, 64, 0.2);
+      padding: 2px 0;
+    }
+    
+    /* 단락 구분 스타일 */
     .section-divider {
       height: 1px;
       background-color: #e5e8ec;
       margin: var(--space-md) 0;
       width: 100%;
-    }
-    
-    /* 첫 번째 이미지처럼 하이라이트된 항목 스타일 */
-    .highlight-row {
-      background-color: rgba(247, 213, 64, 0.12);
-      padding: 8px 0;
-      margin: -8px 0;
     }
 
     /* ul, ol 분리하여 스타일 */
@@ -231,9 +236,9 @@
       padding-left: 8px;
     }
 
-    /* 하이라이트 박스 (두 번째 이미지처럼 노란색 배경으로 변경) */
+    /* 하이라이트 박스 - 첫 번째 슬라이드용 */
     .highlight-box {
-      background-color: rgba(247, 213, 64, 0.1); 
+      background: linear-gradient(to right, rgba(48, 77, 146, 0.08), rgba(48, 77, 146, 0.02));
       border-left: 4px solid var(--accent);
       border-radius: var(--radius);
       padding: var(--space-md) var(--space-md);
@@ -242,6 +247,19 @@
     }
     .highlight-box strong {
       color: var(--primary);
+      position: relative;
+      display: inline-block;
+    }
+    .highlight-box strong::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      background-color: rgba(247, 213, 64, 0.3);
+      z-index: -1;
+      border-radius: 2px;
     }
 
     /* 로고 배너 */
@@ -252,13 +270,7 @@
       margin-bottom: var(--space-lg);
     }
 
-    /* 듀얼 박스 */
-    .dual-box {
-      display: flex;
-      gap: var(--space-md);
-      flex-wrap: wrap;
-      margin-bottom: var(--space-lg);
-    }
+    /* box 스타일링 - 간격 조정 */
     .box {
       flex: 1;
       background-color: rgba(48, 77, 146, 0.05);
@@ -267,6 +279,15 @@
       font-size: 16px;
       color: var(--text-dark);
       border: 1px solid rgba(48, 77, 146, 0.1);
+    }
+    .box ul {
+      margin-bottom: 0;
+    }
+    .box li {
+      margin-bottom: 6px;
+    }
+    .box li:last-child {
+      margin-bottom: 0;
     }
     .box h3 {
       font-size: 18px;
@@ -535,14 +556,14 @@
             <h3>현재 핵심 경쟁력</h3>
             <ul>
               <li>• 디자인 중심의 크리에이티브 랩 (비딩 경쟁력)</li>
-              <li class="highlight-row">• 코스닥 상장으로 확보한 안정적 자금력</li>
+              <li>• <span class="highlight-text">코스닥 상장으로 확보한 안정적 자금력</span></li>
               <li>• 다양한 자회사를 통한 미디어 생태계</li>
             </ul>
           </div>
           <div class="box">
             <h3>투자 확대 분야</h3>
             <ul>
-              <li class="highlight-row">• 글로벌 마케팅 역량 강화</li>
+              <li>• <span class="highlight-text">글로벌 마케팅 역량 강화</span></li>
               <li>• 마케팅 솔루션 개발</li>
               <li>• 자회사 시너지를 통한 신사업 영역</li>
             </ul>
@@ -579,7 +600,7 @@
         
         <p><strong>현재 진행중인 비즈니스</strong></p>
         <ul>
-          <li class="highlight-row">• 게임 산업: <span class="key-point">PC/모바일/콘솔 게임 마케팅</span> (넥슨, 컴투스 등)</li>
+          <li>• 게임 산업: <span class="highlight-text">PC/모바일/콘솔 게임 마케팅</span> (넥슨, 컴투스 등)</li>
           <li>• 금융/보험: 1팀과 4팀에서 주로 담당, 안정적 파트너십 운영</li>
           <li>• 기타 소비재: 3/5팀에서 다양한 영역 커버</li>
         </ul>
@@ -589,7 +610,7 @@
         <p><strong>현재 도전 과제</strong></p>
         <ul>
           <li>• 버티컬 매체(토스/당근 등) 활용 경험 부족</li>
-          <li class="highlight-row">• 규모 큰 클라이언트 수주에 도전하지만 대부분 성사되지 않음</li>
+          <li>• <span class="highlight-text">규모 큰 클라이언트 수주에 도전</span>하지만 대부분 성사되지 않음</li>
           <li>• RFP에 없는 실질 니즈 파악 & 맞춤 솔루션 필요</li>
         </ul>
 
@@ -598,7 +619,7 @@
         <p><strong>실제 일하는 방식</strong></p>
         <ul>
           <li>• 경영진 직보고로 빠른 승인 가능, 논리·수치·히스토리 기반 의사결정</li>
-          <li class="highlight-row">• 경영진은 큰 방향만 제시, <span class="key-point">리더가 우선순위와 실행 책임</span></li>
+          <li>• 경영진은 큰 방향만 제시, <span class="highlight-text">리더가 우선순위와 실행 책임</span></li>
           <li>• 영업/매출 성과를 우선시하며, 성과에 따른 적극적 보상</li>
         </ul>
 
@@ -615,7 +636,7 @@
         <ul>
           <li>• <span class="key-point">조직 성과 목표:</span> 매출·생산성·구성원 매니지먼트 통합 관리</li>
           <li>• <span class="key-point">네트워크 활용:</span> 인적 네트워크로 실질적 비즈니스 창출</li>
-          <li class="highlight-row">• <span class="key-point">우선순위 설정:</span> 중요한 업무 선별 & 리소스 효율 배분</li>
+          <li>• <span class="key-point">우선순위 설정:</span> <span class="highlight-text">중요한 업무 선별 & 리소스 효율 배분</span></li>
         </ul>
         
         <div class="section-divider"></div>
@@ -626,7 +647,7 @@
             <ul>
               <li>• 본인 영업·마케팅 강점 중심 팀 빌딩</li>
               <li>• 신속 의사결정 & 과감한 시도 적극 지원</li>
-              <li class="highlight-row">• 성과 따른 파격 보상 체계</li>
+              <li>• <span class="highlight-text">성과 따른 파격 보상 체계</span></li>
             </ul>
           </div>
           <div class="box">
